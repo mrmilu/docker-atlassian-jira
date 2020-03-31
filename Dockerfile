@@ -26,16 +26,18 @@ ARG TINI_VERSION=v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
-ARG JIRA_VERSION
-ARG ARTEFACT_NAME=atlassian-jira-software
-ARG DOWNLOAD_URL=https://product-downloads.atlassian.com/software/jira/downloads/${ARTEFACT_NAME}-${JIRA_VERSION}.tar.gz
+ARG JIRA_SOFTWARE_VERSION=8.6.1
+ARG JIRA_SOFTWARE_DOWNLOAD_URL=https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-software-${JIRA_SOFTWARE_VERSION}.tar.gz
+ARG JIRA_SERVICEDESK_VERSION=4.6.1
+ARG JIRA_SERVICEDESK_DOWNLOAD_URL=https://product-downloads.atlassian.com/software/jira/downloads/atlassian-servicedesk-${JIRA_SERVICEDESK_VERSION}.tar.gz
 
 RUN groupadd --gid ${RUN_GID} ${RUN_GROUP} \
     && useradd --uid ${RUN_UID} --gid ${RUN_GID} --home-dir ${JIRA_HOME} --shell /bin/bash ${RUN_USER} \
     && echo PATH=$PATH > /etc/environment \
     \
     && mkdir -p                                     ${JIRA_INSTALL_DIR} \
-    && curl -L --silent                             ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "${JIRA_INSTALL_DIR}" \
+    && curl -L --silent                             ${JIRA_SERVICEDESK_DOWNLOAD_URL} | tar -xz --strip-components=1 -C "${JIRA_INSTALL_DIR}" \
+    && curl -L --silent                             ${JIRA_SOFTWARE_DOWNLOAD_URL} | tar -xz --strip-components=1 -C "${JIRA_INSTALL_DIR}" \
     && chmod -R "u=rwX,g=rX,o=rX"                   ${JIRA_INSTALL_DIR}/ \
     && chown -R root.                               ${JIRA_INSTALL_DIR}/ \
     && chown -R ${RUN_USER}:${RUN_GROUP}            ${JIRA_INSTALL_DIR}/logs \

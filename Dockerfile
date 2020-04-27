@@ -26,9 +26,9 @@ ARG TINI_VERSION=v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
-ARG JIRA_SOFTWARE_VERSION=8.6.1
+ARG JIRA_SOFTWARE_VERSION=8.8.1
 ARG JIRA_SOFTWARE_DOWNLOAD_URL=https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-software-${JIRA_SOFTWARE_VERSION}.tar.gz
-ARG JIRA_SERVICEDESK_VERSION=4.6.1
+ARG JIRA_SERVICEDESK_VERSION=4.8.1
 ARG JIRA_SERVICEDESK_DOWNLOAD_URL=https://product-downloads.atlassian.com/software/jira/downloads/atlassian-servicedesk-${JIRA_SERVICEDESK_VERSION}.tar.gz
 
 RUN groupadd --gid ${RUN_GID} ${RUN_GROUP} \

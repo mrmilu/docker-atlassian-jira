@@ -15,6 +15,8 @@ if os.stat('/etc/container_id').st_size == 0:
     gen_cfg('container_id.j2', '/etc/container_id',
             user=RUN_USER, group=RUN_GROUP, overwrite=True)
 gen_cfg('server.xml.j2', f'{JIRA_INSTALL_DIR}/conf/server.xml')
+gen_cfg('seraph-config.xml.j2',
+        f'{JIRA_INSTALL_DIR}/atlassian-jira/WEB-INF/classes/seraph-config.xml')
 gen_cfg('dbconfig.xml.j2', f'{JIRA_HOME}/dbconfig.xml',
         user=RUN_USER, group=RUN_GROUP, overwrite=False)
 if str2bool(env.get('clustered')):

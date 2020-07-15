@@ -144,6 +144,12 @@ Example:
 
     docker run -e JVM_SUPPORT_RECOMMENDED_ARGS=-Djavax.net.ssl.trustStore=/var/atlassian/application-data/jira/cacerts -v jiraVolume:/var/atlassian/application-data/jira --name="jira" -d -p 8080:8080 atlassian/jira-software
 
+## Jira-specific settings
+
+* `ATL_AUTOLOGIN_COOKIE_AGE` (default: 1209600; two weeks, in seconds)
+
+   The maximum time a user can remain logged-in with 'Remember Me'.
+
 ## Database configuration
 
 It is optionally possible to configure the database from the environment,

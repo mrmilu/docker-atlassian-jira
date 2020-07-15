@@ -263,3 +263,21 @@ def test_java_in_user_path(docker_cli, image):
     container = run_image(docker_cli, image)
     proc = container.check_output('su -c "which java" ${RUN_USER}')
     assert len(proc) > 0
+
+def test_seraph_xml_defaults(docker_cli, image):
+    container = run_image(docker_cli, image)
+    _jvm = wait_for_proc(container, get_bootstrap_proc(container))
+    
+    xml = parse_xml(container, f'{get_app_install_dir(container)}/atlassian-jira/WEB-INF/classes/seraph-config.xml')
+    assert [el.findtext('.//param-value') for el in xml.findall('.//init-param') 
+            if el.findtext('.//param-name') == 'autologin.cookie.age'][0] == '1209600'
+
+
+def test_seraph_xml_params(docker_cli, image):
+    environment = {'ATL_AUTOLOGIN_COOKIE_AGE': '9001'}
+    container = run_image(docker_cli, image, environment=environment)
+    _jvm = wait_for_proc(container, get_bootstrap_proc(container))
+    
+    xml = parse_xml(container, f'{get_app_install_dir(container)}/atlassian-jira/WEB-INF/classes/seraph-config.xml')
+    assert [el.findtext('.//param-value') for el in xml.findall('.//init-param') 
+            if el.findtext('.//param-name') == 'autologin.cookie.age'][0] == environment.get('ATL_AUTOLOGIN_COOKIE_AGE')

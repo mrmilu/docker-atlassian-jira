@@ -20,7 +20,7 @@ pipelines:
                 - export MAC_PRODUCT_KEY='jira-software'
                 - export TAG_SUFFIXES='jdk8,ubuntu'
                 - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-                - python /usr/src/app/run.py --create
+                - python /usr/src/app/run.py --create --create-eap
           - step:
               name: Jira Software JDK 11
               services:
@@ -37,7 +37,7 @@ pipelines:
                 - export MAC_PRODUCT_KEY='jira-software'
                 - export TAG_SUFFIXES='jdk11,ubuntu-jdk11'
                 - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-                - python /usr/src/app/run.py --create
+                - python /usr/src/app/run.py --create --create-eap
           - step:
               name: Jira Service Desk JDK 8
               services:
@@ -54,7 +54,7 @@ pipelines:
                 - export MAC_PRODUCT_KEY='jira-servicedesk'
                 - export TAG_SUFFIXES='jdk8,ubuntu'
                 - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-                - python /usr/src/app/run.py --create
+                - python /usr/src/app/run.py --create --create-eap
           - step:
               name: Jira Service Desk JDK 11
               services:
@@ -71,7 +71,7 @@ pipelines:
                 - export MAC_PRODUCT_KEY='jira-servicedesk'
                 - export TAG_SUFFIXES='jdk11,ubuntu-jdk11'
                 - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-                - python /usr/src/app/run.py --create
+                - python /usr/src/app/run.py --create --create-eap
           - step:
               name: Jira Core JDK 8
               services:
@@ -88,7 +88,7 @@ pipelines:
                 - export MAC_PRODUCT_KEY='jira'
                 - export TAG_SUFFIXES='jdk8,ubuntu'
                 - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-                - python /usr/src/app/run.py --create
+                - python /usr/src/app/run.py --create --create-eap
           - step:
               name: Jira Core JDK 11
               services:
@@ -105,7 +105,7 @@ pipelines:
                 - export MAC_PRODUCT_KEY='jira'
                 - export TAG_SUFFIXES='jdk11,ubuntu-jdk11'
                 - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-                - python /usr/src/app/run.py --create
+                - python /usr/src/app/run.py --create --create-eap
     jsw-custom-release:
       - variables:
           - name: JIRA_VERSION

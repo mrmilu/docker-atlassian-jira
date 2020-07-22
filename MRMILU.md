@@ -3,8 +3,8 @@
 ```bash
 $ docker login --username mrmilu
 # $ docker login --username jhenjuto
-$ docker build -t mrmilu/jira:8.10.0 .
-$ docker push mrmilu/jira:8.10.0
+$ docker build -t mrmilu/jira:8.11.0 .
+$ docker push mrmilu/jira:8.11.0
 ```
 
 
